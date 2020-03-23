@@ -12,4 +12,15 @@ if ('cli' !== php_sapi_name()) {
     exit();
 }
 
-(new App(new CliPrinter()))->runCommand($argv);
+$app = new App(new CliPrinter());
+
+$app->registerCommand('hello', function (array $argv) use ($app) {
+    $name = isset ($argv[2]) ? $argv[2] : "World";
+    $app->getPrinter()->display("Hello $name");
+});
+
+$app->registerCommand('help', function (array $argv) use ($app) {
+    $app->getPrinter()->display("usage: minicli hello [ your-name ]");
+});
+
+$app->runCommand($argv);
