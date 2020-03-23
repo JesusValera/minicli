@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JesusValera\Tests;
 
 use JesusValera\Minicli\App;
+use JesusValera\Minicli\IO\CliPrinter;
 use PHPUnit\Framework\TestCase;
 
 final class AppTest extends TestCase
@@ -12,9 +13,9 @@ final class AppTest extends TestCase
     /** @test */
     public function runCommand(): void
     {
-        (new App())->runCommand();
+        (new App(new CliPrinter()))->runCommand();
 
-        $this->expectOutputString("Hello World\n");
+        $this->expectOutputString("\nHello World\n\n");
     }
 
     /** @test */
@@ -22,8 +23,8 @@ final class AppTest extends TestCase
     {
         $argv = [];
         $argv[1] = 'Jesus';
-        (new App())->runCommand($argv);
+        (new App(new CliPrinter()))->runCommand($argv);
 
-        $this->expectOutputString("Hello Jesus\n");
+        $this->expectOutputString("\nHello Jesus\n\n");
     }
 }

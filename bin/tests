@@ -6,10 +6,8 @@ for arg in "$@"; do
 done
 
 if [[ -f /.dockerenv ]]; then
-    echo "dentro"
-    #cd /srv/minicli && vendor/bin/phpunit ${args} --coverage-html coverage;
+    cd /srv/minicli && vendor/bin/phpunit ${args} --coverage-html coverage;
 else
-    echo "else"
     docker exec -ti -u dev minicli sh \
         -c "cd /srv/minicli && vendor/bin/phpunit $args --coverage-html coverage"
 fi

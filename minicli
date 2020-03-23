@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 use JesusValera\Minicli\App;
+use JesusValera\Minicli\IO\CliPrinter;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -11,4 +12,4 @@ if ('cli' !== php_sapi_name()) {
     exit();
 }
 
-(new App())->runCommand($argv);
+(new App(new CliPrinter()))->runCommand($argv);
