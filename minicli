@@ -1,8 +1,14 @@
 #! /usr/bin/php
 <?php
 
+declare(strict_types=1);
+
+use Minicli\App;
+
+require __DIR__ . '/vendor/autoload.php';
+
 if ('cli' !== php_sapi_name()) {
     exit();
 }
 
-echo 'Hello World' . PHP_EOL;
+(new App())->runCommand($argv);
