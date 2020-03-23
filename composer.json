@@ -33,5 +33,8 @@
     "friendsofphp/php-cs-fixer": "^2.16",
     "infection/infection": "^0.14.2",
     "phpunit/phpunit": "^8.5.0"
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
