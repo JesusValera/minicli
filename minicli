@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-use Minicli\App;
+use JesusValera\Minicli\App;
 
 require __DIR__ . '/vendor/autoload.php';
 
