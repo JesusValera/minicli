@@ -1,8 +1,37 @@
 {
+  "name": "jesusvalera/minicli",
+  "description": "Simple PHP CLI (Command Line Interface) framework",
+  "type": "library",
+  "homepage": "https://github.com/JesusValera/minicli",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "framework",
+    "php"
+  ],
+  "authors": [
+    {
+      "name": "Jesus Valera Reales",
+      "email": "jesus1902@outlook.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Minicli\\": "lib/",
       "App\\": "app/"
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Tests\\": "tests/"
+      }
     }
+  },
+  "require": {
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "infection/infection": "^0.14.2",
+    "phpunit/phpunit": "^8.5.0"
   }
 }
