@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Minicli;
+namespace JesusValera\Minicli;
 
 final class App
 {

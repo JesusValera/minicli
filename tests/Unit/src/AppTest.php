@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace JesusValera\Tests;
 
-use Minicli\App;
+use JesusValera\Minicli\App;
 use PHPUnit\Framework\TestCase;
 
 final class AppTest extends TestCase
