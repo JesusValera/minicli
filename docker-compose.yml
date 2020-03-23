@@ -1,0 +1,8 @@
+minicli:
+  build: .
+  dockerfile: devops/dev/php.dockerfile
+  container_name: minicli
+  hostname: php
+  volumes:
+    - .:/srv/minicli:delegated
+    - ~/.ssh:/home/dev/.ssh
