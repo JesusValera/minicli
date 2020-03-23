@@ -1,0 +1,8 @@
+#! /usr/bin/php
+<?php
+
+if ('cli' !== php_sapi_name()) {
+    exit();
+}
+
+echo 'Hello World' . PHP_EOL;
