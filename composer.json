@@ -17,7 +17,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Minicli\\": "lib/",
+      "Minicli\\": "src/",
       "App\\": "app/"
     },
     "autoload-dev": {
