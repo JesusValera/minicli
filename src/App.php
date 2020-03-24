@@ -30,14 +30,10 @@ final class App
         $this->registry[$name] = $callable;
     }
 
-    /** @throws \Exception */
+    /** @throws CommandNotFoundException */
     public function runCommand(array $argv = []): void
     {
-        $commandName = 'help';
-
-        if (isset($argv[1])) {
-            $commandName = $argv[1];
-        }
+        $commandName = $argv[1] ?? 'help';
 
         $command = $this->getCommand($commandName);
 
