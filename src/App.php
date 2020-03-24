@@ -30,11 +30,6 @@ final class App
         $this->registry[$name] = $callable;
     }
 
-    private function getCommand(string $command): ?Closure
-    {
-        return $this->registry[$command] ?? null;
-    }
-
     /** @throws \Exception */
     public function runCommand(array $argv = []): void
     {
@@ -45,10 +40,16 @@ final class App
         }
 
         $command = $this->getCommand($commandName);
-        if ($command === null) {
+
+        if (null === $command) {
             throw new CommandNotFoundException($commandName);
         }
 
         $command($argv);
+    }
+
+    private function getCommand(string $command): ?Closure
+    {
+        return $this->registry[$command] ?? null;
     }
 }

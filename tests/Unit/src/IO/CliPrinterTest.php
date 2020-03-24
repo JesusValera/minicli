@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 final class CliPrinterTest extends TestCase
 {
     /** @test */
-    public function display()
+    public function display(): void
     {
         $message = 'Hello :)';
         (new CliPrinter())->display($message);

@@ -7,7 +7,6 @@ namespace JesusValera\Tests;
 use JesusValera\Minicli\App;
 use JesusValera\Minicli\Exception\CommandNotFoundException;
 use JesusValera\Minicli\IO\CliPrinter;
-use Exception;
 use PHPUnit\Framework\TestCase;
 
 final class AppTest extends TestCase
@@ -20,18 +19,6 @@ final class AppTest extends TestCase
 
         $this->app = new App(new CliPrinter());
         $this->registerCommands();
-    }
-
-    private function registerCommands(): void
-    {
-        $this->app->registerCommand('help', function (array $argv) {
-            $this->app->getPrinter()->display("usage: minicli hello [ your-name ]");
-        });
-
-        $this->app->registerCommand('hello', function (array $argv) {
-            $name = $argv[2] ?? 'World';
-            $this->app->getPrinter()->display("Hello {$name}");
-        });
     }
 
     /** @test */
@@ -65,15 +52,27 @@ final class AppTest extends TestCase
     /** @test */
     public function runNonExistentCommand(): void
     {
-        $this->expectException(CommandNotFoundException::class);
-        $this->expectExceptionMessage('ERROR: Command "foo" not found.');
-
         $commandName = 'foo';
+
+        $this->expectException(CommandNotFoundException::class);
+        $this->expectExceptionMessage("ERROR: Command \"{$commandName}\" not found.");
 
         $argv = [
             1 => $commandName,
         ];
 
         $this->app->runCommand($argv);
+    }
+
+    private function registerCommands(): void
+    {
+        $this->app->registerCommand('help', function (array $argv): void {
+            $this->app->getPrinter()->display('usage: minicli hello [ your-name ]');
+        });
+
+        $this->app->registerCommand('hello', function (array $argv): void {
+            $name = $argv[2] ?? 'World';
+            $this->app->getPrinter()->display("Hello {$name}");
+        });
     }
 }
