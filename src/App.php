@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JesusValera\Minicli;
 
 use Closure;
+use JesusValera\Minicli\Exception\CommandNotFoundException;
 use JesusValera\Minicli\IO\CliPrinter;
 
 final class App
@@ -29,14 +30,15 @@ final class App
         $this->registry[$name] = $callable;
     }
 
-    public function getCommand(string $command): ?Closure
+    private function getCommand(string $command): ?Closure
     {
         return $this->registry[$command] ?? null;
     }
 
+    /** @throws \Exception */
     public function runCommand(array $argv = []): void
     {
-        $commandName = 'World';
+        $commandName = 'help';
 
         if (isset($argv[1])) {
             $commandName = $argv[1];
@@ -44,8 +46,7 @@ final class App
 
         $command = $this->getCommand($commandName);
         if ($command === null) {
-            $this->printer->display("ERROR: Command \"$commandName\" not found.");
-            exit;
+            throw new CommandNotFoundException($commandName);
         }
 
         $command($argv);
