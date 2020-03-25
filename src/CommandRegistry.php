@@ -13,7 +13,7 @@ final class CommandRegistry
     private $registry = [];
 
     /** @var array */
-    protected $controllers = [];
+    private $controllers = [];
 
     public function registerController(string $commandName, CommandController $commandController): void
     {
@@ -25,16 +25,6 @@ final class CommandRegistry
         $this->registry[$name] = $callable;
     }
 
-    private function getController(string $command): ?CommandController
-    {
-        return $this->controllers[$command] ?? null;
-    }
-
-    private function getCommand(string $command): ?Closure
-    {
-        return $this->registry[$command] ?? null;
-    }
-
     /** @throws CommandNotFoundException */
     public function getCallable(string $commandName, array $argv): void
     {
@@ -42,6 +32,7 @@ final class CommandRegistry
 
         if ($controller instanceof CommandController) {
             $controller->run($argv);
+
             return;
         }
 
@@ -52,5 +43,15 @@ final class CommandRegistry
         }
 
         $command([$argv]);
+    }
+
+    private function getController(string $command): ?CommandController
+    {
+        return $this->controllers[$command] ?? null;
+    }
+
+    private function getCommand(string $command): ?Closure
+    {
+        return $this->registry[$command] ?? null;
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace JesusValera\Minicli;
 
-use JesusValera\Minicli\Exception\CommandNotFoundException;
 use JesusValera\Minicli\IO\CliPrinter;
 
 final class App
