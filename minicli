@@ -3,6 +3,7 @@
 
 declare(strict_types=1);
 
+use JesusValera\App\Command\HelloController;
 use JesusValera\Minicli\App;
 use JesusValera\Minicli\IO\CliPrinter;
 
@@ -15,13 +16,10 @@ if ('cli' !== php_sapi_name()) {
 $app = new App(new CliPrinter());
 
 $app->registerCommand('help', function (array $argv) use ($app) {
-    $app->getPrinter()->display("usage: minicli hello [ your-name ]");
+    $app->getPrinter()->display('usage: minicli hello [ your-name ]');
 });
 
-$app->registerCommand('hello', function (array $argv) use ($app) {
-    $name = isset ($argv[2]) ? $argv[2] : "World";
-    $app->getPrinter()->display("Hello $name");
-});
+$app->registerController('hello', new HelloController($app));
 
 try {
     $app->runCommand($argv);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JesusValera\Tests;
 
+use JesusValera\App\Command\HelloController;
 use JesusValera\Minicli\App;
 use JesusValera\Minicli\Exception\CommandNotFoundException;
 use JesusValera\Minicli\IO\CliPrinter;
@@ -70,9 +71,6 @@ final class AppTest extends TestCase
             $this->app->getPrinter()->display('usage: minicli hello [ your-name ]');
         });
 
-        $this->app->registerCommand('hello', function (array $argv): void {
-            $name = $argv[2] ?? 'World';
-            $this->app->getPrinter()->display("Hello {$name}");
-        });
+        $this->app->registerController('hello', new HelloController($this->app));
     }
 }

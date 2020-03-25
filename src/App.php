@@ -24,22 +24,20 @@ final class App
         return $this->printer;
     }
 
+    public function registerController(string $name, CommandController $controller): void
+    {
+        $this->commandRegistry->registerController($name, $controller);
+    }
+
     public function registerCommand($name, $callable): void
     {
         $this->commandRegistry->registerCommand($name, $callable);
     }
 
-    /** @throws CommandNotFoundException */
-    public function runCommand(array $argv = []): void
+    public function runCommand(array $argv = [], string $defaultCommand = 'help'): void
     {
-        $commandName = $argv[1] ?? 'help';
+        $commandName = $argv[1] ?? $defaultCommand;
 
-        $command = $this->commandRegistry->getCommand($commandName);
-
-        if (null === $command) {
-            throw new CommandNotFoundException($commandName);
-        }
-
-        $command($argv);
+        $this->commandRegistry->getCallable($commandName, $argv);
     }
 }
