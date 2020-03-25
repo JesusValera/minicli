@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ -f /.dockerenv ]]; then
-    cd /srv/minicli && vendor/bin/php-cs-fixer fix
-else
-    docker exec -ti -u dev minicli sh \
-        -c "cd /srv/minicli && vendor/bin/php-cs-fixer fix"
-fi
