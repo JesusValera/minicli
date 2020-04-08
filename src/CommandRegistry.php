@@ -29,7 +29,7 @@ final class CommandRegistry
     public function getCallable(string $commandName, array $argv): void
     {
         /** @var null|CommandInterface $controller */
-        $controller = $this->controllers[$commandName] ?? null;
+        $controller = $this->getController($commandName);
 
         if ($controller instanceof CommandInterface) {
             $controller->run($argv);
@@ -43,7 +43,7 @@ final class CommandRegistry
             throw new CommandNotFoundException($commandName);
         }
 
-        $command([$argv]);
+        $command($argv);
     }
 
     private function getController(string $command): ?CommandInterface
