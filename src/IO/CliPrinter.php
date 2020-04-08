@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JesusValera\Minicli\IO;
 
-final class CliPrinter
+final class CliPrinter implements PrinterInterface
 {
     public function display(string $message): void
     {

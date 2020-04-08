@@ -2,52 +2,41 @@
 
 declare(strict_types=1);
 
-namespace JesusValera\Tests;
+namespace JesusValera\MinicliTests\Unit;
 
-use JesusValera\App\Command\HelloController;
 use JesusValera\Minicli\App;
 use JesusValera\Minicli\Exception\CommandNotFoundException;
-use JesusValera\Minicli\IO\CliPrinter;
+use JesusValera\Minicli\IO\PrinterInterface;
 use PHPUnit\Framework\TestCase;
 
 final class AppTest extends TestCase
 {
-    private App $app;
-
-    protected function setUp(): void
+    /** @test */
+    public function runHelpByDefaultCommand(): void
     {
-        parent::setUp();
+        $printer = $this->createMock(PrinterInterface::class);
+        $printer->expects(self::once())->method('display');
 
-        $this->app = new App(new CliPrinter());
-        $this->registerCommands();
+        $app = new App();
+        $app->registerCommand('help', function () use ($printer): void {
+            $printer->display('anything');
+        });
+
+        $app->runCommand([]);
     }
 
     /** @test */
-    public function runHelpCommand(): void
+    public function runCommandWithArgs(): void
     {
-        $this->app->runCommand();
+        $printer = $this->createMock(PrinterInterface::class);
+        $printer->expects(self::once())->method('display')->with('second');
 
-        $this->expectOutputString("\nusage: minicli hello [ your-name ]\n\n");
-    }
+        $app = new App();
+        $app->registerCommand('first', function (array $args) use ($printer): void {
+            $printer->display($args[2]);
+        });
 
-    /** @test */
-    public function runHelloCommand(): void
-    {
-        $this->app->runCommand([1 => 'hello']);
-
-        $this->expectOutputString("\nHello World\n\n");
-    }
-
-    /** @test */
-    public function runHelloCommandWithParam(): void
-    {
-        $argv = [
-            1 => 'hello',
-            2 => 'Jesus',
-        ];
-        $this->app->runCommand($argv);
-
-        $this->expectOutputString("\nHello Jesus\n\n");
+        $app->runCommand([1 => 'first', 2 => 'second']);
     }
 
     /** @test */
@@ -62,15 +51,7 @@ final class AppTest extends TestCase
             1 => $commandName,
         ];
 
-        $this->app->runCommand($argv);
-    }
-
-    private function registerCommands(): void
-    {
-        $this->app->registerCommand('help', function (array $argv): void {
-            $this->app->getPrinter()->display('usage: minicli hello [ your-name ]');
-        });
-
-        $this->app->registerController('hello', new HelloController($this->app));
+        $app = new App();
+        $app->runCommand($argv);
     }
 }

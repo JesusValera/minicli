@@ -13,16 +13,17 @@ if ('cli' !== php_sapi_name()) {
     exit();
 }
 
-$app = new App(new CliPrinter());
+$printer = new CliPrinter();
+$app = new App();
 
-$app->registerCommand('help', function (array $argv) use ($app) {
-    $app->getPrinter()->display('usage: minicli hello [ your-name ]');
+$app->registerCommand('help', function () use ($printer) {
+    $printer->display('usage: minicli hello [ your-name ]');
 });
 
-$app->registerController('hello', new HelloController($app));
+$app->registerController('hello', new HelloController($printer));
 
 try {
     $app->runCommand($argv);
 } catch (Exception $exception) {
-    $app->getPrinter()->display($exception->getMessage());
+    $printer->display($exception->getMessage());
 }

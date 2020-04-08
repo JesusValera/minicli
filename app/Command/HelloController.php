@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 namespace JesusValera\App\Command;
 
-use JesusValera\Minicli\CommandController;
+use JesusValera\Minicli\CommandInterface;
+use JesusValera\Minicli\IO\PrinterInterface;
 
-final class HelloController extends CommandController
+final class HelloController implements CommandInterface
 {
-    public function run(array $argv): void
+    private PrinterInterface $printer;
+
+    public function __construct(PrinterInterface $printer)
     {
-        $name = isset ($argv[2]) ? $argv[2] : "World";
-        $this->app->getPrinter()->display("Hello $name");
+        $this->printer = $printer;
+    }
+
+    public function run(array $argv = []): void
+    {
+        $name = $argv[2] ?? 'World';
+        $this->printer->display("Hello $name");
     }
 }
