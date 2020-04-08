@@ -29,7 +29,7 @@ final class CommandRegistry
     public function getCallable(string $commandName, array $argv): void
     {
         /** @var null|CommandInterface $controller */
-        $controller = $this->getController($commandName);
+        $controller = $this->controllers[$commandName] ?? null;
 
         if ($controller instanceof CommandInterface) {
             $controller->run($argv);
@@ -37,22 +37,14 @@ final class CommandRegistry
             return;
         }
 
-        $command = $this->getCommand($commandName);
+        $command = $this->registry[$commandName] ?? null;
 
-        if (null === $command) {
-            throw new CommandNotFoundException($commandName);
+        if ($command instanceof Closure) {
+            $command($argv);
+
+            return;
         }
 
-        $command($argv);
-    }
-
-    private function getController(string $command): ?CommandInterface
-    {
-        return $this->controllers[$command] ?? null;
-    }
-
-    private function getCommand(string $command): ?Closure
-    {
-        return $this->registry[$command] ?? null;
+        throw new CommandNotFoundException($commandName);
     }
 }
