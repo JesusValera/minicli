@@ -17,10 +17,8 @@ final class AppTest extends TestCase
         $printer = $this->createMock(PrinterInterface::class);
         $printer->expects(self::once())->method('display');
 
-        $app = new App();
-        $app->registerCommand('help', function () use ($printer): void {
-            $printer->display('anything');
-        });
+        $app = (new App())
+            ->registerCommand('help', fn() => $printer->display('anything'));
 
         $app->runCommand([]);
     }
@@ -31,10 +29,8 @@ final class AppTest extends TestCase
         $printer = $this->createMock(PrinterInterface::class);
         $printer->expects(self::once())->method('display')->with('second');
 
-        $app = new App();
-        $app->registerCommand('first', function (array $args) use ($printer): void {
-            $printer->display($args[2]);
-        });
+        $app = (new App())
+            ->registerCommand('first', fn(array $args) => $printer->display($args[2]));
 
         $app->runCommand([1 => 'first', 2 => 'second']);
     }
@@ -47,11 +43,6 @@ final class AppTest extends TestCase
         $this->expectException(CommandNotFoundException::class);
         $this->expectExceptionMessage("ERROR: Command \"{$commandName}\" not found.");
 
-        $argv = [
-            1 => $commandName,
-        ];
-
-        $app = new App();
-        $app->runCommand($argv);
+        (new App())->runCommand([1 => $commandName]);
     }
 }
