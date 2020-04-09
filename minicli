@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-use JesusValera\App\Command\HelloController;
+use JesusValera\Minicli\Command\HelloController;
 use JesusValera\Minicli\App;
 use JesusValera\Minicli\IO\CliPrinter;
 

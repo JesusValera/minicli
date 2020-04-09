@@ -13,17 +13,21 @@ final class App
         $this->commandRegistry = new CommandRegistry();
     }
 
-    public function registerController(string $name, CommandInterface $controller): void
+    public function registerController(string $name, CommandInterface $controller): self
     {
         $this->commandRegistry->registerController($name, $controller);
+
+        return $this;
     }
 
-    public function registerCommand(string $name, callable $callable): void
+    public function registerCommand(string $name, callable $callable): self
     {
         $this->commandRegistry->registerCommand($name, $callable);
+
+        return $this;
     }
 
-    public function runCommand(array $argv = [], string $defaultCommand = 'help'): void
+    public function runCommand(array $argv, string $defaultCommand = 'help'): void
     {
         $commandName = $argv[1] ?? $defaultCommand;
 
