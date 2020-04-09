@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JesusValera\App\Command;
+namespace JesusValera\Minicli\Command;
 
 use JesusValera\Minicli\CommandInterface;
 use JesusValera\Minicli\IO\PrinterInterface;

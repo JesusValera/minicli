@@ -1,13 +1,15 @@
 <?php
 
-namespace JesusValera\Tests\App\Command;
+declare(strict_types=1);
 
-use JesusValera\App\Command\HelloController;
+namespace JesusValera\MinicliTests\Command;
+
 use JesusValera\Minicli\App;
+use JesusValera\Minicli\Command\HelloController;
 use JesusValera\Minicli\IO\PrinterInterface;
 use PHPUnit\Framework\TestCase;
 
-class HelloControllerTest extends TestCase
+final class HelloControllerTest extends TestCase
 {
     /** @test */
     public function runNoParams(): void

@@ -17,13 +17,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "JesusValera\\Minicli\\": "src/",
-      "JesusValera\\App\\": "app/"
+      "JesusValera\\Minicli\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "JesusValera\\Tests\\": "tests/"
+      "JesusValera\\MiniCliTests\\": "tests/"
     }
   },
   "require": {
