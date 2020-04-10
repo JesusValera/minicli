@@ -18,7 +18,7 @@ final class AppTest extends TestCase
         $printer->expects(self::once())->method('display');
 
         $app = (new App())
-            ->registerCommand('help', fn() => $printer->display('anything'));
+            ->registerCommand('help', fn () => $printer->display('anything'));
 
         $app->runCommand([]);
     }
@@ -30,7 +30,7 @@ final class AppTest extends TestCase
         $printer->expects(self::once())->method('display')->with('second');
 
         $app = (new App())
-            ->registerCommand('first', fn(array $args) => $printer->display($args[2]));
+            ->registerCommand('first', fn (array $args) => $printer->display($args[2]));
 
         $app->runCommand([1 => 'first', 2 => 'second']);
     }
