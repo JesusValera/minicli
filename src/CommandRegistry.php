@@ -37,6 +37,7 @@ final class CommandRegistry
             return;
         }
 
+        /** @var null|Closure $command */
         $command = $this->registry[$commandName] ?? null;
 
         if ($command instanceof Closure) {
