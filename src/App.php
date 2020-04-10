@@ -4,36 +4,30 @@ declare(strict_types=1);
 
 namespace JesusValera\Minicli;
 
-use JesusValera\Minicli\IO\CliPrinter;
-
 final class App
 {
-    private CliPrinter $printer;
-
     private CommandRegistry $commandRegistry;
 
-    public function __construct(CliPrinter $printer)
+    public function __construct()
     {
-        $this->printer = $printer;
         $this->commandRegistry = new CommandRegistry();
     }
 
-    public function getPrinter(): CliPrinter
-    {
-        return $this->printer;
-    }
-
-    public function registerController(string $name, CommandController $controller): void
+    public function registerController(string $name, CommandInterface $controller): self
     {
         $this->commandRegistry->registerController($name, $controller);
+
+        return $this;
     }
 
-    public function registerCommand($name, $callable): void
+    public function registerCommand(string $name, callable $callable): self
     {
         $this->commandRegistry->registerCommand($name, $callable);
+
+        return $this;
     }
 
-    public function runCommand(array $argv = [], string $defaultCommand = 'help'): void
+    public function runCommand(array $argv, string $defaultCommand = 'help'): void
     {
         $commandName = $argv[1] ?? $defaultCommand;
 

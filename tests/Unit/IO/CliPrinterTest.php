@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace JesusValera\MinicliTests;
+
 use JesusValera\Minicli\IO\CliPrinter;
 use PHPUnit\Framework\TestCase;
 

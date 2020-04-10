@@ -15,7 +15,7 @@ final class CommandRegistry
     /** @var array */
     private $controllers = [];
 
-    public function registerController(string $commandName, CommandController $commandController): void
+    public function registerController(string $commandName, CommandInterface $commandController): void
     {
         $this->controllers = [$commandName => $commandController];
     }
@@ -28,30 +28,23 @@ final class CommandRegistry
     /** @throws CommandNotFoundException */
     public function getCallable(string $commandName, array $argv): void
     {
-        $controller = $this->getController($commandName);
+        /** @var null|CommandInterface $controller */
+        $controller = $this->controllers[$commandName] ?? null;
 
-        if ($controller instanceof CommandController) {
+        if ($controller instanceof CommandInterface) {
             $controller->run($argv);
 
             return;
         }
 
-        $command = $this->getCommand($commandName);
+        $command = $this->registry[$commandName] ?? null;
 
-        if (null === $command) {
-            throw new CommandNotFoundException($commandName);
+        if ($command instanceof Closure) {
+            $command($argv);
+
+            return;
         }
 
-        $command([$argv]);
-    }
-
-    private function getController(string $command): ?CommandController
-    {
-        return $this->controllers[$command] ?? null;
-    }
-
-    private function getCommand(string $command): ?Closure
-    {
-        return $this->registry[$command] ?? null;
+        throw new CommandNotFoundException($commandName);
     }
 }
