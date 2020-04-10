@@ -12,5 +12,4 @@ Issue: #
 # Checklist
 
 - [ ] Tests are passing
-- [ ] Mutants are defeated
 - [ ] Code coverage is not decreased
