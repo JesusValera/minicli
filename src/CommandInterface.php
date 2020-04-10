@@ -6,5 +6,5 @@ namespace JesusValera\Minicli;
 
 interface CommandInterface
 {
-    public function run(array $argv): void;
+    public function run(array $args): void;
 }

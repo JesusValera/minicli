@@ -29,11 +29,11 @@ final class App
         return $this;
     }
 
-    public function runCommand(array $argv, string $defaultCommand = 'help'): void
+    public function runCommand(array $args): void
     {
         /** @var string $commandName */
-        $commandName = $argv[1] ?? $defaultCommand;
+        $commandName = $args[1] ?? 'help';
 
-        $this->commandRegistry->getCallable($commandName, $argv);
+        $this->commandRegistry->getCallable($commandName, $args);
     }
 }

@@ -26,22 +26,22 @@ final class CommandRegistry
     }
 
     /** @throws CommandNotFoundException */
-    public function getCallable(string $commandName, array $argv): void
+    public function getCallable(string $commandName, array $args): void
     {
-        /** @var null|CommandInterface $controller */
+        /** @var CommandInterface|null $controller */
         $controller = $this->controllers[$commandName] ?? null;
 
         if ($controller instanceof CommandInterface) {
-            $controller->run($argv);
+            $controller->run($args);
 
             return;
         }
 
-        /** @var null|Closure $command */
+        /** @var Closure|null $command */
         $command = $this->registry[$commandName] ?? null;
 
         if ($command instanceof Closure) {
-            $command($argv);
+            $command($args);
 
             return;
         }
