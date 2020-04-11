@@ -11,3 +11,4 @@ before_install:
 script:
   - ./vendor/bin/phpunit tests --coverage-clover tests/clover.xml --configuration phpunit.xml --coverage-clover tests/clover.xml
   - ./vendor/bin/php-cs-fixer
+  - ./vendor/bin/psalm --shepherd --stats

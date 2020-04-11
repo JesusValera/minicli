@@ -16,9 +16,10 @@ final class HelloController implements CommandInterface
         $this->printer = $printer;
     }
 
-    public function run(array $argv = []): void
+    public function run(array $args): void
     {
-        $name = $argv[2] ?? 'World';
+        /** @var string $name */
+        $name = $args[2] ?? 'World';
         $this->printer->display("Hello $name");
     }
 }

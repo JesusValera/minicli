@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace JesusValera\Minicli;
 
+use Closure;
+
 final class App
 {
     private CommandRegistry $commandRegistry;
@@ -20,17 +22,18 @@ final class App
         return $this;
     }
 
-    public function registerCommand(string $name, callable $callable): self
+    public function registerCommand(string $name, Closure $callable): self
     {
         $this->commandRegistry->registerCommand($name, $callable);
 
         return $this;
     }
 
-    public function runCommand(array $argv, string $defaultCommand = 'help'): void
+    public function runCommand(array $args): void
     {
-        $commandName = $argv[1] ?? $defaultCommand;
+        /** @var string $commandName */
+        $commandName = $args[1] ?? 'help';
 
-        $this->commandRegistry->getCallable($commandName, $argv);
+        $this->commandRegistry->getCallable($commandName, $args);
     }
 }

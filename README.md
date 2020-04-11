@@ -2,6 +2,7 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JesusValera/minicli/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JesusValera/minicli/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/JesusValera/minicli/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/JesusValera/minicli/?branch=master)
+[![Type Coverage](https://shepherd.dev/github/JesusValera/minicli/coverage.svg)](https://shepherd.dev/github/JesusValera/minicli)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg?style=flat-square)](https://php.net/)
 
