@@ -3,22 +3,20 @@
 
 declare(strict_types=1);
 
-use JesusValera\Minicli\Command\HelloController;
 use JesusValera\Minicli\App;
+use JesusValera\Minicli\Command\HelloController;
 use JesusValera\Minicli\IO\CliPrinter;
 
 require __DIR__ . '/vendor/autoload.php';
 
-if ('cli' !== php_sapi_name()) {
+if ('cli' !== PHP_SAPI) {
     exit();
 }
 
 $printer = new CliPrinter();
 $app = new App();
 
-$app->registerCommand('help', function () use ($printer) {
-    $printer->display('usage: minicli hello [ your-name ]');
-});
+$app->registerCommand('help', fn() => $printer->display('usage: minicli hello [ your-name ]'));
 
 $app->registerController('hello', new HelloController($printer));
 
