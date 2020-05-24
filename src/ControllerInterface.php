@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JesusValera\Minicli;
 
-interface CommandInterface
+interface ControllerInterface
 {
     public function run(array $args): void;
 }
