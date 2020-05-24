@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JesusValera\MinicliTests;
+namespace JesusValera\MinicliTests\Unit;
 
 use JesusValera\Minicli\App;
 use JesusValera\Minicli\Exception\CommandNotFoundException;

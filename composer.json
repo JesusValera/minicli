@@ -22,7 +22,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "JesusValera\\MiniCliTests\\": "tests/"
+      "JesusValera\\MinicliTests\\": "tests/"
     }
   },
   "require": {
