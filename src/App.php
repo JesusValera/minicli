@@ -15,7 +15,7 @@ final class App
         $this->commandRegistry = new CommandRegistry();
     }
 
-    public function registerController(string $name, CommandInterface $controller): self
+    public function registerController(string $name, ControllerInterface $controller): self
     {
         $this->commandRegistry->registerController($name, $controller);
 

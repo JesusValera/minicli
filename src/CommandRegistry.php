@@ -9,13 +9,11 @@ use JesusValera\Minicli\Exception\CommandNotFoundException;
 
 final class CommandRegistry
 {
-    /** @var array */
-    private $registry = [];
+    private array $registry = [];
 
-    /** @var array */
-    private $controllers = [];
+    private array $controllers = [];
 
-    public function registerController(string $commandName, CommandInterface $commandController): void
+    public function registerController(string $commandName, ControllerInterface $commandController): void
     {
         $this->controllers = [$commandName => $commandController];
     }
@@ -28,16 +26,16 @@ final class CommandRegistry
     /** @throws CommandNotFoundException */
     public function getCallable(string $commandName, array $args): void
     {
-        /** @var CommandInterface|null $controller */
+        /** @var null|ControllerInterface $controller */
         $controller = $this->controllers[$commandName] ?? null;
 
-        if ($controller instanceof CommandInterface) {
+        if ($controller instanceof ControllerInterface) {
             $controller->run($args);
 
             return;
         }
 
-        /** @var Closure|null $command */
+        /** @var null|Closure $command */
         $command = $this->registry[$commandName] ?? null;
 
         if ($command instanceof Closure) {

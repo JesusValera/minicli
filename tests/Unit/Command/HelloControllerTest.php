@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JesusValera\MinicliTests\Command;
+namespace JesusValera\MinicliTests\Unit\Command;
 
 use JesusValera\Minicli\Command\HelloController;
 use JesusValera\Minicli\IO\PrinterInterface;

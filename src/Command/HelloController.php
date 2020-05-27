@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace JesusValera\Minicli\Command;
 
-use JesusValera\Minicli\CommandInterface;
+use JesusValera\Minicli\ControllerInterface;
 use JesusValera\Minicli\IO\PrinterInterface;
 
-final class HelloController implements CommandInterface
+final class HelloController implements ControllerInterface
 {
     private PrinterInterface $printer;
 
